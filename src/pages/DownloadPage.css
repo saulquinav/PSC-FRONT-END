@@ -1,0 +1,129 @@
+.download-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f4e9;
+  padding: 20px;
+}
+
+.download-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+.download-header {
+  margin-bottom: 2rem;
+}
+
+.download-header h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.download-subtitle {
+  color: #666;
+}
+
+.download-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.download-file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.download-file-item:hover {
+  background-color: #f9f9f9;
+}
+
+.download-file-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.download-file-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.download-file-meta {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.download-primary-button {
+  padding: 0.5rem 1rem;
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-primary-button:hover {
+  background-color: #d35400;
+}
+
+.download-back-button {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #6d7b8d;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #6d7b8d;
+}
+
+.download-back-button:hover {
+  background-color: #f0f4f8;
+  color: #5a6d82;
+  border-color: #5a6d82;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.download-loading,
+.download-empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.download-empty-state button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-empty-state button:hover {
+  background-color: #d35400;
+}

@@ -5,16 +5,20 @@ import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { UploadPage } from './pages/UploadPage';
 import { DownloadPage } from './pages/DownloadPage';
+import { NavBar } from './components/NavBar';
+import { UserCrudPage } from './crud-test-pages/UserCrudPage';
 
 function App() {
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/download" element={<DownloadPage />} />
+        <Route path="/user-crud" element={<UserCrudPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,5 @@
 // Change this to you local machine name URL
-const MACHINE_NAME_URL = "andrei-10nm003tri:8080";
+const MACHINE_NAME_URL = "";
 
 export function getBackendBaseAPI(): string
 {

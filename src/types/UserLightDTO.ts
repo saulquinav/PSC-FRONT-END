@@ -1,4 +1,4 @@
-interface UserLightDTO {
+export interface UserLightDTO {
   id?: number;
   username: string;
 }

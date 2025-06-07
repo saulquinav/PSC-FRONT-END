@@ -1,4 +1,4 @@
-interface DocumentPermissionDTO {
+export interface DocumentPermissionDTO {
   userId?: number;
   documentId?: number;
   name?: string;

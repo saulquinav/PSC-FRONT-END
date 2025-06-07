@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AuthPages.css";
+import { UserLoginDTO } from "../types/UserLoginDTO";
+import { LoginResponseDTO } from "../types/LoginResponseDTO";
 
-interface UserLoginDTO {
-  username: string;
-  password: string;
-}
-
-interface LoginResponseDTO {
-  token: string;
-}
 
 export function LoginPage() {
   const [loginData, setLoginData] = useState<UserLoginDTO>({

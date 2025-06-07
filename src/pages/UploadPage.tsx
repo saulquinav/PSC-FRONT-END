@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./UploadPage.css";
+import { DocumentUploadDTO } from "../types/DocumentUploadDTO";
 
-interface DocumentDTO {
-  name: string;
-  data: Blob;
-}
 
 export function UploadPage() {
-  const [documentData, setDocumentData] = useState<Omit<DocumentDTO, 'data'>>({
+  const [documentData, setDocumentData] = useState<Omit<DocumentUploadDTO, 'data'>>({
     name: ''
   });
   const [file, setFile] = useState<File | null>(null);

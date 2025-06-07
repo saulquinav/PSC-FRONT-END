@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DownloadPage.css";
+import { DocumentDownloadDTO } from "../types/DocumentDownloadDTO";
 
-interface DocumentDTO {
-  id: number;
-  name: string;
-  size: number;
-  uploadDate: string;
-}
 
 export function DownloadPage() {
-  const [documents, setDocuments] = useState<DocumentDTO[]>([]);
+  const [documents, setDocuments] = useState<DocumentDownloadDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -25,7 +20,7 @@ export function DownloadPage() {
         
         if (!response.ok) throw new Error('Failed to fetch documents');
         
-        const data: DocumentDTO[] = await response.json();
+        const data: DocumentDownloadDTO[] = await response.json();
         setDocuments(data);
       } catch (error) {
         console.error("Error fetching documents:", error);

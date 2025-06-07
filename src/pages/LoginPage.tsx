@@ -2,18 +2,56 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AuthPages.css";
 
+interface UserLoginDTO {
+  username: string;
+  password: string;
+}
+
+interface LoginResponseDTO {
+  token: string;
+}
+
 export function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState<UserLoginDTO>({
+    username: '',
+    password: ''
+  });
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (username && password) {
-      localStorage.setItem("username", username);
-      navigate("/dashboard");  // Changed from "/files" to "/dashboard"
-    } else {
+    if (!loginData.username || !loginData.password) {
       alert("Please enter both username and password");
+      return;
     }
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const { token }: LoginResponseDTO = await response.json();
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("username", loginData.username);
+      navigate("/dashboard");
+    } catch (error) {
+      alert("Invalid username or password");
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
@@ -24,15 +62,17 @@ export function LoginPage() {
           <p className="welcome-message">Sign in to access your files</p>
         </div>
         <input
+          name="username"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={loginData.username}
+          onChange={handleInputChange}
         />
         <input
+          name="password"
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={loginData.password}
+          onChange={handleInputChange}
         />
         <button onClick={handleLogin}>Sign In</button>
         <p className="auth-footer">

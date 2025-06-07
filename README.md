@@ -4,6 +4,8 @@ This branch is for testing the CRUD (Create, Read, Update, Delete) functionality
 
 This branch adds a new folder, 'crud-test-pages', which contains a React page for each back-end Entity. Each React page offers all CRUD operations for the Entity of that DTO and shows a list of all Entities currently available on hte back-end database.
 
+This branch is only for experimentation/testing.
+
 
 # Getting Started with Create React App
 

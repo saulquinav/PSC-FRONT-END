@@ -1,6 +1,6 @@
 // User DTO for reading already existing users from the back-end database
 
-export interface UserReadDTO {
+export interface UserReadingDTO {
   id: number;
   username: string;
 }

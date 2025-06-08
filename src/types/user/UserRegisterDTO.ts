@@ -1,7 +1,6 @@
 // User DTO for creating new users on the back-end database
 
-export interface UserCreateDTO
-{
+export interface UserRegisterDTO {
     username: string;
     password: string;
 }

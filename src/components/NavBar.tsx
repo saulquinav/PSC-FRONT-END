@@ -10,6 +10,7 @@ export function NavBar() {
             <Link to="/download">Download</Link>|{' '}
             <Link to="/user-crud">User CRUD</Link>|{' '}
             <Link to="/doc-metadata-crud">Doc Metadata CRUD</Link>|{' '}
+            <Link to="/doc-data-crud">Doc Data CRUD</Link>|{' '}
         </nav>
     );
 }

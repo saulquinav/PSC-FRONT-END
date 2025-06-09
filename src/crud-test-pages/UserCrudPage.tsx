@@ -8,7 +8,7 @@ import { UserUpdateDTO } from "../types/user/UserUpdateDTO";
 const API_URL = getBackendBaseAPI() + "/users";
 
 export function UserCrudPage() {
-    /* This internal "variable" keeps track if the back-end is online (available) or not.
+  /* This internal "variable" keeps track if the back-end is online (available) or not.
   ** If the back-end is not available, then this page fails gracefully, instead of trowing
   ** JavaScript errors in the browser console. */
   const [backendAvailable, setBackendAvailable] = useState(true);
@@ -44,7 +44,8 @@ export function UserCrudPage() {
 
   const handleCreate = async () => {
     try {
-      await axios.post(API_URL, newUser);
+      // post() seems to work with or without '{ withCredentials: true }'
+      await axios.post(API_URL, newUser, { withCredentials: true });
       setNewUser({ username: '', password: '' });
       fetchUsers();
     }
@@ -91,7 +92,7 @@ export function UserCrudPage() {
     <div>
       <h1>User CRUD</h1>
 
-      {errorMessage && <div>{errorMessage}</div>}
+      {(!backendAvailable || errorMessage) && <div>{errorMessage}</div>}
 
       <div>
         <input

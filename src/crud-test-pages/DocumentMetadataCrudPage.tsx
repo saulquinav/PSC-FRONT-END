@@ -11,9 +11,11 @@ export function DocumentMetadataCrudPage() {
   ** If the back-end is not available, then this page fails gracefully, instead of trowing
   ** JavaScript errors in the browser console. */
   const [backendAvailable, setBackendAvailable] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const [documentMetadatas, setDocumentMetadatas] = useState<DocumentMetadataDTO[]>([]);
   const [newName, setNewName] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [editingNames, setEditingNames] = useState<Record<number, string>>({});
 
   const fetchDocumentMetadatas = async () => {
     try {
@@ -41,13 +43,15 @@ export function DocumentMetadataCrudPage() {
     }
   };
 
-  const updateDocumentMetadata = async (id: number, name: string) => {
+    // Update item name
+  const updateDocumentMetadata = async (id: number) => {
+    const updatedName = editingNames[id];
     try {
-      await axios.put(`${API_URL}/${id}`, { name });
+      await axios.put(`${API_URL}/${id}`, { id, name: updatedName });
       fetchDocumentMetadatas();
     }
     catch (err) {
-      setErrorMessage('Failed to update document metadata.');
+      setErrorMessage(`Failed to update item with id ${id}.`);
       setBackendAvailable(false);
     }
   };
@@ -85,15 +89,19 @@ export function DocumentMetadataCrudPage() {
 
       <ul>
         {documentMetadatas.map((doc) => (
-          <li key={doc.id}>
-            <div>
-              <div>ID: {doc.id}</div>
-              <input
-                type="text"
-                defaultValue={doc.name}
-                onBlur={(e) => updateDocumentMetadata(doc.id, e.target.value)}
-              />
-            </div>
+          <li key={doc.id} style={{ marginBottom: '10px' }}>
+            <strong>ID:</strong> {doc.id} <br />
+            <strong>Name:</strong>{' '}
+            <input
+              value={editingNames[doc.id] ?? doc.name}
+              onChange={(e) =>
+                setEditingNames((prev) => ({
+                  ...prev,
+                  [doc.id]: e.target.value,
+                }))
+              }
+            />
+            <button onClick={() => updateDocumentMetadata(doc.id)}>Save</button>
             <button onClick={() => deleteDocumentMetadata(doc.id)}>Delete</button>
           </li>
         ))}

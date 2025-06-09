@@ -7,6 +7,7 @@ import { UploadPage } from './pages/UploadPage';
 import { DownloadPage } from './pages/DownloadPage';
 import { NavBar } from './components/NavBar';
 import { UserCrudPage } from './crud-test-pages/UserCrudPage';
+import { DocumentMetadataCrudPage } from './crud-test-pages/DocumentMetadataCrudPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/user-crud" element={<UserCrudPage />} />
+        <Route path="/doc-metadata-crud" element={<DocumentMetadataCrudPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
-import { UploadPage } from './pages/UploadPage';
-import { DownloadPage } from './pages/DownloadPage';
+import { ComponentListPage } from './pages/ComponentListPage';
+import { AddComponentPage } from './pages/AddComponentPage';
+import { EditComponentPage } from './pages/EditComponentPage';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route path="/download" element={<DownloadPage />} />
+        <Route path="/components" element={<ComponentListPage />} />
+        <Route path="/add-component" element={<AddComponentPage />} />
+        <Route path="/edit-component" element={<EditComponentPage />} />
       </Routes>
     </BrowserRouter>
   );

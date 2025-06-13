@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./EditComponentPage.css";
+import "./EditInventoryItemPage.css";
 
 export function EditInventoryItemPage() {
   // Mocked list of components

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./AddComponentPage.css";
+import "./AddInventoryItemPage.css";
 
 export function AddInventoryItemPage() {
   const navigate = useNavigate();

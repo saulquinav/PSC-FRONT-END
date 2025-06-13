@@ -93,12 +93,12 @@ export function InventoryItemListPage() {
         <tbody>
           {inventoryItems.map(item => (
             <tr >
-                <td>ID: {item.id}</td>
-                <td>Name: {item.name}</td>
-                <td>Type: {item.itemType}</td>
-                <td>Brand: {item.brand}</td>
-                <td>Model: {item.model}</td>
-                <td>Quantity: {item.quantity}</td>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.itemType}</td>
+                <td>{item.brand}</td>
+                <td>{item.model}</td>
+                <td>{item.quantity}</td>
             </tr>
           ))}
         </tbody>

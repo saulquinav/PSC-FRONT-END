@@ -9,6 +9,8 @@ export function NavBar() {
             <Link to="/upload">Upload</Link>|{' '}
             <Link to="/download">Download</Link>|{' '}
             <Link to="/user-crud">User CRUD</Link>|{' '}
+            <Link to="/inventory-item-crud">Inventory Item CRUD</Link>|{' '}
+            <Link to="/inventory-log-crud">Inventory Log CRUD</Link>|{' '}
         </nav>
     );
 }

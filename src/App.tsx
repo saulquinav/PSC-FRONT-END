@@ -3,18 +3,28 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
-import { UploadPage } from './pages/UploadPage';
-import { DownloadPage } from './pages/DownloadPage';
+import { ComponentListPage } from './pages/ComponentListPage';
+import { AddComponentPage } from './pages/AddComponentPage';
+import { EditComponentPage } from './pages/EditComponentPage';
+import { UserCrudPage } from './crud-test-pages/UserCrudPage';
+import { InventoryItemCrudPage } from './crud-test-pages/InventoryItemCrudPage';
+import { NavBar } from './components/NavBar';
+import { InventoryLogCrudPage } from './crud-test-pages/InventoryLogCrudPage';
 
 function App() {
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route path="/download" element={<DownloadPage />} />
+        <Route path="/components" element={<ComponentListPage />} />
+        <Route path="/add-component" element={<AddComponentPage />} />
+        <Route path="/edit-component" element={<EditComponentPage />} />
+        <Route path="/user-crud" element={<UserCrudPage />} />
+        <Route path="/inventory-item-crud" element={<InventoryItemCrudPage />} />
+        <Route path="/inventory-log-crud" element={<InventoryLogCrudPage />} />
       </Routes>
     </BrowserRouter>
   );

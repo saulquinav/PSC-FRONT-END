@@ -20,5 +20,4 @@ export interface InventoryItemDTO
     brand: string;
     model: string;
     quantity: number;
-
 }

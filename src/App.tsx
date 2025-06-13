@@ -7,6 +7,7 @@ import { ComponentListPage } from './pages/ComponentListPage';
 import { AddComponentPage } from './pages/AddComponentPage';
 import { EditComponentPage } from './pages/EditComponentPage';
 import { UserCrudPage } from './crud-test-pages/UserCrudPage';
+import { InventoryItemCrudPage } from './crud-test-pages/InventoryItemCrudPage';
 import { NavBar } from './components/NavBar';
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <Route path="/add-component" element={<AddComponentPage />} />
         <Route path="/edit-component" element={<EditComponentPage />} />
         <Route path="/user-crud" element={<UserCrudPage />} />
+        <Route path="/inventory-item-crud" element={<InventoryItemCrudPage />} />
+        <Route path="/inventory-log-crud" element={<UserCrudPage />} />
       </Routes>
     </BrowserRouter>
   );

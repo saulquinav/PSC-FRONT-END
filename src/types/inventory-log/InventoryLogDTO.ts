@@ -5,7 +5,7 @@ export enum InventoryAction
     DELETE = "DELETE"
 }
 
-export interface InventotyLogDTO
+export interface InventoryLogDTO
 {
     id: number;
     action: InventoryAction; // CREATE, UPDATE, DELETE

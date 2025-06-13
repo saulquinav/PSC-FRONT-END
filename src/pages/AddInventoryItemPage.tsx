@@ -48,6 +48,10 @@ export function AddInventoryItemPage() {
       <h1>Add New Component</h1>
       <p className="subtitle">Fill in the details to register a new PC component</p>
 
+      {/* First we check if the backend is unavailable or if an error occured
+      ** and only then we display the list of inventory items */}
+      {(!backendAvailable || errorMessage) && <div>{errorMessage}</div>}
+
       <form className="component-form">
         <label>
           Name:

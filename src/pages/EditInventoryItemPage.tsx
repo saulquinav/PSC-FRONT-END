@@ -1,13 +1,21 @@
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+import { getBackendBaseApiUrl } from "../service/api-url";
+import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
+
 import "./EditInventoryItemPage.css";
 
+const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
+
 export function EditInventoryItemPage() {
-  // Mocked list of components
-  const components = [
-    { id: 1, name: "Ryzen 5 5600X", brand: "AMD", model: "100-100000065BOX", quantity: 10 },
-    { id: 2, name: "Intel i7 12700K", brand: "Intel", model: "BX8071512700K", quantity: 5 },
-    { id: 3, name: "Samsung 970 EVO Plus", brand: "Samsung", model: "MZ-V7S500B/AM", quantity: 12 },
-  ];
+  /* The 'backendAvailable' variable keeps track if the back-end is online (available) or not.
+  ** If the back-end is not available, then this page fails gracefully, instead of trowing
+  ** JavaScript errors in the browser console. */
+  const [backendAvailable, setBackendAvailable] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [inventoryItems, setInventoryItems] = useState<InventoryItemDTO[]>([]);
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [formData, setFormData] = useState({
@@ -17,8 +25,21 @@ export function EditInventoryItemPage() {
     quantity: "",
   });
 
+  const fetchItems = async () => {
+    try{
+        const response = await axios.get<InventoryItemDTO[]>(API_URL);
+        setInventoryItems(response.data);
+        setErrorMessage(null);
+        setBackendAvailable(true);
+    }
+    catch (err) {
+        setErrorMessage("Failed to fetch items from the server.");
+        setBackendAvailable(false);
+    }
+  };
+
   const handleComponentSelect = (id: number) => {
-    const selected = components.find((c) => c.id === id);
+    const selected = inventoryItems.find((c) => c.id === id);
     if (selected) {
       setSelectedId(id);
       setFormData({
@@ -46,8 +67,12 @@ export function EditInventoryItemPage() {
     alert("Component updated!");
   };
 
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
   return (
-    <>
+    <div>
       {/* Back Button placed outside the container */}
       <button className="back-button" onClick={() => window.history.back()}>
         ← Back to Dashboard
@@ -57,6 +82,10 @@ export function EditInventoryItemPage() {
       <div className="edit-component-container">
         <h1>Edit Component</h1>
 
+        {/* First we check if the backend is unavailable or if an error occured
+        ** and only then we display the list of inventory items */}
+        {(!backendAvailable || errorMessage) && <div>{errorMessage}</div>}
+
         <div className="form-group">
           <label>Select Component</label>
           <select
@@ -64,7 +93,7 @@ export function EditInventoryItemPage() {
             onChange={(e) => handleComponentSelect(Number(e.target.value))}
           >
             <option value="" disabled>Select a component</option>
-            {components.map((c) => (
+            {inventoryItems.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
               </option>
@@ -119,6 +148,6 @@ export function EditInventoryItemPage() {
           </form>
         )}
       </div>
-    </>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-# 'iventory-crud-integration' branch
+# 'inventory-crud-integration' branch
 
 This branch is for integrating the CRUD (Create, Read, Update, Delete) functionality into the main pages, instead of using the CRUD functionality from the test pages.
 

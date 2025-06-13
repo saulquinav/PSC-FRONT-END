@@ -4,7 +4,7 @@ import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ComponentListPage } from './pages/ComponentListPage';
-import { AddComponentPage } from './pages/AddComponentPage';
+import { AddInventoryItemPage } from './pages/AddInventoryItemPage';
 import { EditComponentPage } from './pages/EditComponentPage';
 import { UserCrudPage } from './crud-test-pages/UserCrudPage';
 import { InventoryItemCrudPage } from './crud-test-pages/InventoryItemCrudPage';
@@ -20,7 +20,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/components" element={<ComponentListPage />} />
-        <Route path="/add-component" element={<AddComponentPage />} />
+        <Route path="/add-component" element={<AddInventoryItemPage />} />
         <Route path="/edit-component" element={<EditComponentPage />} />
         <Route path="/user-crud" element={<UserCrudPage />} />
         <Route path="/inventory-item-crud" element={<InventoryItemCrudPage />} />

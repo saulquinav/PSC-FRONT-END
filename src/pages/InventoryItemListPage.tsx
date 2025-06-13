@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./ComponentListPage.css";
 
-export function ComponentListPage() {
+export function InventoryItemListPage() {
   const navigate = useNavigate();
 
   return (

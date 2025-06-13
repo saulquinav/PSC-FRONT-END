@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
-import { ComponentListPage } from './pages/ComponentListPage';
+import { InventoryItemListPage } from './pages/InventoryItemListPage';
 import { AddInventoryItemPage } from './pages/AddInventoryItemPage';
 import { EditComponentPage } from './pages/EditComponentPage';
 import { UserCrudPage } from './crud-test-pages/UserCrudPage';
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/components" element={<ComponentListPage />} />
+        <Route path="/components" element={<InventoryItemListPage />} />
         <Route path="/add-component" element={<AddInventoryItemPage />} />
         <Route path="/edit-component" element={<EditComponentPage />} />
         <Route path="/user-crud" element={<UserCrudPage />} />

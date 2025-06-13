@@ -4,7 +4,7 @@ import { InventoryItemDTO, ItemType } from '../types/inventory-item/InventoryIte
 import { getBackendBaseApiUrl } from '../service/api-url';
 import { InventoryAction, InventoryLogDTO } from '../types/inventory-log/InventoryLogDTO';
 
-const API_URL = getBackendBaseApiUrl() + "/iventorylogs";
+const API_URL = getBackendBaseApiUrl() + "/inventorylogs";
 
 export function InventoryLogCrudPage()
 {

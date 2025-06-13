@@ -1,8 +1,51 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+
+import { getBackendBaseApiUrl } from "../service/api-url";
+import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
+
 import "./InventoryItemListPage.css";
+
+const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
 export function InventoryItemListPage() {
   const navigate = useNavigate();
+
+  /* The 'backendAvailable' variable keeps track if the back-end is online (available) or not.
+  ** If the back-end is not available, then this page fails gracefully, instead of trowing
+  ** JavaScript errors in the browser console. */
+  const [backendAvailable, setBackendAvailable] = useState(true);
+
+  /* An error message that is displayed if back-end is unavailable or an error occured */
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [inventoryItems, setInventoryItems] = useState<InventoryItemDTO[]>([]);
+
+  /* Fetch all inventory items from the back-end.
+  ** We use 'axios' library for fetching items from the back-end. */
+  const fetchUsers = async () => {
+    try {
+      // Get items
+      const response = await axios.get<InventoryItemDTO[]>(API_URL);
+
+      // Sort items before displaying
+      const sortedItems = response.data.sort((a, b) => a.id - b.id); // sort by ID ascending
+      setInventoryItems(sortedItems);
+
+      setErrorMessage(null);
+      setBackendAvailable(true);
+    }
+    catch (err) {
+      setErrorMessage('Failed to fetch inventory items. Backend might be unavailable.');
+      setBackendAvailable(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <div className="component-list-container">
@@ -10,6 +53,10 @@ export function InventoryItemListPage() {
         <h1>Component Inventory</h1>
         <p>Browse and manage all hardware components</p>
       </div>
+
+      {/* First we check if the backend is unavailable or if an error occured
+       ** and only then we display the list of inventory items */}
+      {(!backendAvailable || errorMessage) && <div>{errorMessage}</div>}
 
       <div className="filters">
         <input type="text" placeholder="Search by name..." />
@@ -35,31 +82,25 @@ export function InventoryItemListPage() {
       <table className="component-table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
+            <th>Type</th>
             <th>Brand</th>
             <th>Model</th>
             <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>GeForce RTX 3080</td>
-            <td>NVIDIA</td>
-            <td>Founders Edition</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>Ryzen 5 5600X</td>
-            <td>AMD</td>
-            <td>100-100000065BOX</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>Samsung 980 Pro</td>
-            <td>Samsung</td>
-            <td>MZ-V8P1T0BW</td>
-            <td>0</td>
-          </tr>
+          {inventoryItems.map(item => (
+            <tr >
+                <td>ID: {item.id}</td>
+                <td>Name: {item.name}</td>
+                <td>Type: {item.itemType}</td>
+                <td>Brand: {item.brand}</td>
+                <td>Model: {item.model}</td>
+                <td>Quantity: {item.quantity}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
 

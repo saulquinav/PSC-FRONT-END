@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./EditComponentPage.css";
 
-export function EditComponentPage() {
+export function EditInventoryItemPage() {
   // Mocked list of components
   const components = [
     { id: 1, name: "Ryzen 5 5600X", brand: "AMD", model: "100-100000065BOX", quantity: 10 },

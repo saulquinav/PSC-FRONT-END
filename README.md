@@ -1,4 +1,4 @@
-# ‘iventory-crud’ branch
+# 'iventory-crud' branch
 
 This branch is for testing the CRUD (Create, Read, Update, Delete) functionality for both this React front-end and its corresponding Java and Jakarta/Payara back-end. 
 This branch adds a new folder, ‘crud-test-pages’, which contains a React page for each back-end Entity. Each React page offers all CRUD operations for the Entity of that DTO and shows a list of all Entities currently available on the back-end database. 

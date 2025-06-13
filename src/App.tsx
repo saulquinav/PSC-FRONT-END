@@ -6,10 +6,13 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ComponentListPage } from './pages/ComponentListPage';
 import { AddComponentPage } from './pages/AddComponentPage';
 import { EditComponentPage } from './pages/EditComponentPage';
+import { UserCrudPage } from './crud-test-pages/UserCrudPage';
+import { NavBar } from './components/NavBar';
 
 function App() {
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -17,6 +20,7 @@ function App() {
         <Route path="/components" element={<ComponentListPage />} />
         <Route path="/add-component" element={<AddComponentPage />} />
         <Route path="/edit-component" element={<EditComponentPage />} />
+        <Route path="/user-crud" element={<UserCrudPage />} />
       </Routes>
     </BrowserRouter>
   );

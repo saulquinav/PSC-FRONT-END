@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getBackendBaseAPI } from "../service/api";
+import { getBackendBaseApiUrl } from "../service/api-url";
 import { UserReadingDTO } from "../types/user/UserReadingDTO";
 import { UserRegisterDTO } from "../types/user/UserRegisterDTO";
-import { UserUpdateDTO } from "../types/user/UserUpdateDTO";
 
-const API_URL = getBackendBaseAPI() + "/users";
+const API_URL = getBackendBaseApiUrl() + "/users";
 
 export function UserCrudPage() {
   /* This internal "variable" keeps track if the back-end is online (available) or not.

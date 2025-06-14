@@ -13,6 +13,8 @@ export function EditInventoryItemPage() {
   ** If the back-end is not available, then this page fails gracefully, instead of trowing
   ** JavaScript errors in the browser console. */
   const [backendAvailable, setBackendAvailable] = useState(true);
+
+  /* An error message that is displayed if back-end is unavailable or an error occured */
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [inventoryItems, setInventoryItems] = useState<InventoryItemDTO[]>([]);

@@ -77,7 +77,7 @@ export function InventoryItemCrudPage()
         setNewItem(prev => ({ ...prev, [field]: value }));
     };
 
-        return (
+    return (
         <div>
             <h1>Inventory Items</h1>
 

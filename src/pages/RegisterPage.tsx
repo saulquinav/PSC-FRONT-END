@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import axios from "axios";
 import { axiosPublicClient } from "../service/client";
 
 import { getBackendBaseApiUrl } from "../service/api-url";

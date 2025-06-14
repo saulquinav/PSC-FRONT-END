@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { InventoryItemDTO, ItemType } from '../types/inventory-item/InventoryItemDTO';
+
 import { getBackendBaseApiUrl } from '../service/api-url';
 import { InventoryAction, InventoryLogDTO } from '../types/inventory-log/InventoryLogDTO';
+import { axiosPublicClient } from '../service/client';
 
 const API_URL = getBackendBaseApiUrl() + "/inventorylogs";
 
@@ -23,7 +23,7 @@ export function InventoryLogCrudPage()
 
     const fetchItems = async () => {
         try{
-            const response = await axios.get<InventoryLogDTO[]>(API_URL);
+            const response = await axiosPublicClient.get<InventoryLogDTO[]>(API_URL);
             setInventoryItems(response.data);
             setErrorMessage(null);
             setBackendAvailable(true);
@@ -36,7 +36,7 @@ export function InventoryLogCrudPage()
 
     const createItem = async () => {
         try {
-            await axios.post(API_URL, newLog);
+            await axiosPublicClient.post(API_URL, newLog);
             setNewLog({ action: InventoryAction.CREATE, quantityChange: 0, note: "" });
             fetchItems();
         }
@@ -48,7 +48,7 @@ export function InventoryLogCrudPage()
 
     const deleteLog = async (id: number) => {
         try {
-            await axios.delete(`${API_URL}/${id}`);
+            await axiosPublicClient.delete(`${API_URL}/${id}`);
             fetchItems();
         }
         catch (err) {
@@ -59,7 +59,7 @@ export function InventoryLogCrudPage()
 
     const updateLog = async (item: InventoryLogDTO) => {
         try {
-            await axios.put(`${API_URL}/${item.id}`, item);
+            await axiosPublicClient.put(`${API_URL}/${item.id}`, item);
             fetchItems();
         }
         catch (err) {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO, ItemType } from "../types/inventory-item/InventoryItemDTO";
 
 import "./EditInventoryItemPage.css";
+import { axiosPublicClient } from '../service/client';
 
 const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
@@ -39,7 +39,7 @@ export function EditInventoryItemPage() {
   // Function for fetching all items, so we can select the item we want to edit
   const fetchItems = async () => {
     try{
-        const response = await axios.get<InventoryItemDTO[]>(API_URL);
+        const response = await axiosPublicClient.get<InventoryItemDTO[]>(API_URL);
         setInventoryItems(response.data);
         setErrorMessage(null);
         setBackendAvailable(true);
@@ -77,7 +77,7 @@ export function EditInventoryItemPage() {
   // It has to be declared at the top-level because it's an asynchronious function.
   const handleUpdate = async (item: InventoryItemDTO) => {
     try {
-        await axios.put(`${API_URL}/${item.id}`, item);
+        await axiosPublicClient.put(`${API_URL}/${item.id}`, item);
         fetchItems();
     }
     catch (err) {

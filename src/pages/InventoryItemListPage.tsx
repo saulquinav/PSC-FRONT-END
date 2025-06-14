@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
-
 import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
 
 import "./InventoryItemListPage.css";
+import { axiosPublicClient } from "../service/client";
 
 const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
@@ -28,7 +27,7 @@ export function InventoryItemListPage() {
   const fetchItems = async () => {
     try {
       // Get items
-      const response = await axios.get<InventoryItemDTO[]>(API_URL);
+      const response = await axiosPublicClient.get<InventoryItemDTO[]>(API_URL);
 
       // Sort items before displaying
       const sortedItems = response.data.sort((a, b) => a.id - b.id); // sort by ID ascending

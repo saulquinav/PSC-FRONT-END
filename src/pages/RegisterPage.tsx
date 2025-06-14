@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import { axiosPublicClient } from "../service/client";
 
 import { getBackendBaseApiUrl } from "../service/api-url";
 import { UserLoginDTO } from "../types/user/UserLoginDTO";
@@ -24,14 +24,13 @@ export function RegisterPage() {
   /* An error message that is displayed if back-end is unavailable or an error occured */
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  
   const handleRegister = async () => {
     if (username && password) {
       try {
         const newUser: UserLoginDTO = { username: username, password: password }
 
         // post() seems to work with or without '{ withCredentials: true }'
-        await axios.post(API_URL, newUser, { withCredentials: true });
+        await axiosPublicClient.post(API_URL, newUser, { withCredentials: true });
         
         alert("Account created successfully!");
         navigate("/");
@@ -44,6 +43,7 @@ export function RegisterPage() {
     else
       alert("Please enter both username and password");
   };
+
 
   return (
     <div className="auth-container">

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 
 import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO, ItemType } from '../types/inventory-item/InventoryItemDTO';
 
 import "./AddInventoryItemPage.css";
+import { axiosPublicClient } from '../service/client';
 
 
 const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
@@ -29,9 +29,8 @@ export function AddInventoryItemPage() {
 
   const handleCreate = async () => {
     try {
-        await axios.post(API_URL, newItem);
+        await axiosPublicClient.post(API_URL, newItem);
         setNewItem({ name: "", itemType: ItemType.OTHER, brand: "", model: "", quantity: 0 });
-        // fetchItems();
     }
     catch (err) {
         setErrorMessage("Failed to create item.");

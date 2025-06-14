@@ -1,6 +1,6 @@
-# 'inventory-crud-integration' branch
+# 'inventory-auth' branch
 
-This branch is for integrating the CRUD (Create, Read, Update, Delete) functionality into the main pages, instead of using the CRUD functionality from the test pages.
+This branch is for adding authentication (login) and authorization for the React CRUD pages.
 
 # Getting Started with Create React App
 

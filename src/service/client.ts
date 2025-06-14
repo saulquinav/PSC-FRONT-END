@@ -6,7 +6,7 @@ const API_URL = getBackendBaseApiUrl() + "/auth";
 
 const token = localStorage.getItem('token');
 
-const axiosAuthClient = axios.create({
+export const axiosAuthClient = axios.create({
   baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
@@ -24,11 +24,9 @@ axiosAuthClient.interceptors.request.use((config) => {
 });
 
 
-const axiosPublicClient = axios.create({
+export const axiosPublicClient = axios.create({
   baseURL: "http://localhost:8080/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
-
-export default {axiosAuthClient, axiosPublicClient};

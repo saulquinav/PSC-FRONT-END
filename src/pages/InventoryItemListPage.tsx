@@ -25,7 +25,7 @@ export function InventoryItemListPage() {
 
   /* Fetch all inventory items from the back-end.
   ** We use 'axios' library for fetching items from the back-end. */
-  const fetchUsers = async () => {
+  const fetchItems = async () => {
     try {
       // Get items
       const response = await axios.get<InventoryItemDTO[]>(API_URL);
@@ -43,8 +43,10 @@ export function InventoryItemListPage() {
     }
   };
 
+  // We use the 'useEffect()' React lifecycle hook in order to fetch all inventory
+  // item from the back-end, when this component is started
   useEffect(() => {
-    fetchUsers();
+    fetchItems();
   }, []);
 
   return (

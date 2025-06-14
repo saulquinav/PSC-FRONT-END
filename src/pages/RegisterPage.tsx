@@ -24,7 +24,7 @@ export function RegisterPage() {
   /* An error message that is displayed if back-end is unavailable or an error occured */
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-
+  
   const handleRegister = async () => {
     if (username && password) {
       try {
@@ -48,7 +48,7 @@ export function RegisterPage() {
   return (
     <div className="auth-container">
       {(!backendAvailable || errorMessage) && <div>{errorMessage}</div>}
-      
+
       <div className="auth-card">
         <div className="auth-header">
           <h2>Create New Account</h2>

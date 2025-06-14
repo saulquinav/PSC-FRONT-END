@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { getBackendBaseApiUrl } from "../service/api-url";
-import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
+import { InventoryItemDTO, ItemType } from "../types/inventory-item/InventoryItemDTO";
 
 import "./EditInventoryItemPage.css";
 
@@ -18,6 +18,15 @@ export function EditInventoryItemPage() {
   const [inventoryItems, setInventoryItems] = useState<InventoryItemDTO[]>([]);
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<InventoryItemDTO>({
+                                                                          id: 0,
+                                                                          name: "",
+                                                                          itemType: ItemType.OTHER,
+                                                                          brand: "",
+                                                                          model: "",
+                                                                          quantity: 0
+                                                                      });
+
   const [formData, setFormData] = useState({
     name: "",
     brand: "",
@@ -25,6 +34,7 @@ export function EditInventoryItemPage() {
     quantity: "",
   });
 
+  // Function for fetching all items, so we can select the item we want to edit
   const fetchItems = async () => {
     try{
         const response = await axios.get<InventoryItemDTO[]>(API_URL);
@@ -38,10 +48,14 @@ export function EditInventoryItemPage() {
     }
   };
 
-  const handleComponentSelect = (id: number) => {
+  // Function that selects an item from a list of all items
+  const handleItemSelect = (id: number) => {
     const selected = inventoryItems.find((c) => c.id === id);
+
     if (selected) {
       setSelectedId(id);
+      setSelectedItem(selected);
+      
       setFormData({
         name: selected.name,
         brand: selected.brand,
@@ -51,9 +65,23 @@ export function EditInventoryItemPage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Function which handles the update/change of a single value/field of the InventoryItemDTO
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // This is the asynchronious function that saves the updated item to the back-end.
+  // It has to be declared at the top-level because it's an asynchronious function.
+  const handleUpdate = async (item: InventoryItemDTO) => {
+    try {
+        await axios.put(`${API_URL}/${item.id}`, item);
+        fetchItems();
+    }
+    catch (err) {
+        setErrorMessage("Failed to update item.");
+        setBackendAvailable(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,6 +91,18 @@ export function EditInventoryItemPage() {
       return;
     }
 
+    // Construct the updated item
+    const updatedItem: InventoryItemDTO = {
+        id: selectedId!,
+        name: formData.name,
+        itemType: selectedItem.itemType,
+        brand: formData.brand,
+        model: formData.model,
+        quantity: parseInt(formData.quantity)
+    };
+
+    // Save the updated item to the back-end
+    handleUpdate(updatedItem);
     console.log("Updated component:", { id: selectedId, ...formData });
     alert("Component updated!");
   };
@@ -90,7 +130,7 @@ export function EditInventoryItemPage() {
           <label>Select Component</label>
           <select
             value={selectedId ?? ""}
-            onChange={(e) => handleComponentSelect(Number(e.target.value))}
+            onChange={(e) => handleItemSelect(Number(e.target.value))}
           >
             <option value="" disabled>Select a component</option>
             {inventoryItems.map((c) => (
@@ -109,7 +149,7 @@ export function EditInventoryItemPage() {
                 type="text"
                 name="name"
                 value={formData.name}
-                onChange={handleChange}
+                onChange={handleValueChange}
               />
             </div>
 
@@ -119,7 +159,7 @@ export function EditInventoryItemPage() {
                 type="text"
                 name="brand"
                 value={formData.brand}
-                onChange={handleChange}
+                onChange={handleValueChange}
               />
             </div>
 
@@ -129,7 +169,7 @@ export function EditInventoryItemPage() {
                 type="text"
                 name="model"
                 value={formData.model}
-                onChange={handleChange}
+                onChange={handleValueChange}
               />
             </div>
 
@@ -140,7 +180,7 @@ export function EditInventoryItemPage() {
                 name="quantity"
                 min="0"
                 value={formData.quantity}
-                onChange={handleChange}
+                onChange={handleValueChange}
               />
             </div>
 

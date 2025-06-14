@@ -1,23 +1,54 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+
+import { getBackendBaseApiUrl } from "../service/api-url";
+import { UserLoginDTO } from "../types/user/UserLoginDTO";
+
 import "./AuthPages.css";
+
+
+const API_URL = getBackendBaseApiUrl() + "/users";
 
 export function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  /* The 'backendAvailable' variable keeps track if the back-end is online (available) or not.
+  ** If the back-end is not available, then this page fails gracefully, instead of trowing
+  ** JavaScript errors in the browser console. */
+  const [backendAvailable, setBackendAvailable] = useState(true);
+
+  /* An error message that is displayed if back-end is unavailable or an error occured */
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+
   const handleRegister = async () => {
     if (username && password) {
-      alert("Account created successfully!");
-      navigate("/");
-    } else {
-      alert("Please enter both username and password");
+      try {
+        const newUser: UserLoginDTO = { username: username, password: password }
+
+        // post() seems to work with or without '{ withCredentials: true }'
+        await axios.post(API_URL, newUser, { withCredentials: true });
+        
+        alert("Account created successfully!");
+        navigate("/");
+      }
+      catch (err) {
+        setErrorMessage('Failed to create user.');
+        setBackendAvailable(false);
+      }
     }
+    else
+      alert("Please enter both username and password");
   };
 
   return (
     <div className="auth-container">
+      {(!backendAvailable || errorMessage) && <div>{errorMessage}</div>}
+      
       <div className="auth-card">
         <div className="auth-header">
           <h2>Create New Account</h2>

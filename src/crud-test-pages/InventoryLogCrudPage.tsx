@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { getBackendBaseApiUrl } from '../service/api-url';
 import { InventoryAction, InventoryLogDTO } from '../types/inventory-log/InventoryLogDTO';
-import { axiosPublicClient } from '../service/client';
+import { axiosPublicClient } from '../service/auth';
 
-// const API_URL = getBackendBaseApiUrl() + "/inventorylogs";
 
 export function InventoryLogCrudPage()
 {

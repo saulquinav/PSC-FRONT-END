@@ -5,9 +5,8 @@ import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
 
 import "./InventoryItemListPage.css";
-import { axiosPublicClient } from "../service/client";
+import { axiosAuthClient, axiosPublicClient } from "../service/auth";
 
-// const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
 export function InventoryItemListPage() {
   const navigate = useNavigate();
@@ -27,7 +26,8 @@ export function InventoryItemListPage() {
   const fetchItems = async () => {
     try {
       // Get items
-      const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
+      // const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
+      const response = await axiosAuthClient.get<InventoryItemDTO[]>("/inventoryitems");
 
       // Sort items before displaying
       const sortedItems = response.data.sort((a, b) => a.id - b.id); // sort by ID ascending

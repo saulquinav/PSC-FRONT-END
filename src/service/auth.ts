@@ -2,41 +2,47 @@ import axios from "axios";
 
 import { getBackendBaseApiUrl } from "./api-url";
 
-const API_URL = getBackendBaseApiUrl() + "/auth";
 
-export function getToken(): string | null
+export interface AuthContextType
 {
-    return localStorage.getItem('token');
+    token: string | null;
+    setToken: (token: string | null) => void;
 }
 
-export async function login(username: string, password: string) {
-    const res = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
-    if (!res.ok) throw new Error('Login failed');
-    const data = await res.json();
+const API_URL = getBackendBaseApiUrl();
 
-    /* After login, we need to store the user's credentials somehow.
-    ** The credentials come in the form of a JWT token and we store that token
-    ** in the browser's 'localStorage'.
-    ** The variable inside 'localStorage' will be named 'token' (any name will do). */
-    localStorage.setItem('token', data.token);
-}
+const token = localStorage.getItem('jwt-auth-token');
 
-export async function publicLogin(username: string, password: string) {
-    const res = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
-    if (!res.ok) throw new Error('Login failed');
-    const data = await res.json();
+/* In this file we have two 'axios' clients:
+** - a client for back-end APIs that do not require an authenticated user (public client)
+** - a client for back-end APIs that require an authenticated user (auth client) */
 
-    /* After login, we need to store the user's credentials somehow.
-    ** The credentials come in the form of a JWT token and we store that token
-    ** in the browser's 'localStorage'.
-    ** The variable inside 'localStorage' will be named 'token' (any name will do). */
-    localStorage.setItem('token', data.token);
-}
+// Public APIs client
+export const axiosPublicClient = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Protected APIs client
+export const axiosAuthClient = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    // ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  },
+});
+
+// Automatically attach token on each request
+axiosAuthClient.interceptors.request.use((config) => {
+  // First, get the authentication token from the browser's 'locaLStorage'
+  const token = localStorage.getItem('jwt-auth-token');
+
+  if (token) {
+    config.headers = config.headers || {};
+    // config.headers.Authorization = `Bearer ${token}`;
+    config.headers['Authorization'] = `Bearer ${token}`; // might also work
+  }
+  return config;
+});

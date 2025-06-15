@@ -4,9 +4,8 @@ import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO, ItemType } from "../types/inventory-item/InventoryItemDTO";
 
 import "./EditInventoryItemPage.css";
-import { axiosPublicClient } from '../service/client';
+import { axiosPublicClient } from '../service/auth';
 
-// const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
 export function EditInventoryItemPage() {
   /* The 'backendAvailable' variable keeps track if the back-end is online (available) or not.

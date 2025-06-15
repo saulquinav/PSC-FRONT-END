@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { axiosPublicClient } from "../service/client";
-
+import { axiosPublicClient } from "../service/auth";
 import { getBackendBaseApiUrl } from "../service/api-url";
 import { UserRegisterDTO } from "../types/user/UserRegisterDTO";
 
 import "./AuthPages.css";
-
 
 
 const API_URL = getBackendBaseApiUrl() + "/auth/register";

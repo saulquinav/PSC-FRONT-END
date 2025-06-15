@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { getBackendBaseApiUrl } from "../service/api-url";
 import { UserReadingDTO } from "../types/user/UserReadingDTO";
 import { UserRegisterDTO } from "../types/user/UserRegisterDTO";
-import { axiosPublicClient } from "../service/client";
+import { axiosPublicClient } from "../service/auth";
 
-// const API_URL = getBackendBaseApiUrl() + "/users";
 
 export function UserCrudPage() {
   /* This internal "variable" keeps track if the back-end is online (available) or not.

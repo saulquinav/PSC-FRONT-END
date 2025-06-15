@@ -21,7 +21,7 @@ export function UserCrudPage() {
   // Sort Users Before Displaying
   const fetchUsers = async () => {
     try {
-      const response = await axiosPublicClient.get<UserReadingDTO[]>(API_URL);
+      const response = await axiosPublicClient.get<UserReadingDTO[]>("/users");
       const sortedUsers = response.data.sort((a, b) => a.id - b.id); // sort by ID ascending
       setUsers(sortedUsers);
       const edits: Record<number, { username: string; password: string }> = {};
@@ -45,7 +45,7 @@ export function UserCrudPage() {
   const handleCreate = async () => {
     try {
       // post() seems to work with or without '{ withCredentials: true }'
-      await axiosPublicClient.post(API_URL, newUser, { withCredentials: true });
+      await axiosPublicClient.post("/users", newUser, { withCredentials: true });
       setNewUser({ username: '', password: '' });
       fetchUsers();
     }
@@ -58,7 +58,7 @@ export function UserCrudPage() {
   const handleUpdate = async (id: number) => {
     try {
       const updatedUser = { id, ...editUsers[id] };
-      await axiosPublicClient.put(`${API_URL}/${id}`, updatedUser);
+      await axiosPublicClient.put(`/users/${id}`, updatedUser);
       fetchUsers();
     }
     catch (err) {
@@ -69,7 +69,7 @@ export function UserCrudPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axiosPublicClient.delete(`${API_URL}/${id}`);
+      await axiosPublicClient.delete(`/users/${id}`);
       fetchUsers();
     }
     catch (err) {

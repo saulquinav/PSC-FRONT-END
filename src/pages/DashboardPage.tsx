@@ -13,19 +13,19 @@ export function DashboardPage() {
 
       <div className="dashboard-content-grid">
         {/* Action Cards */}
-        <div className="dashboard-card" onClick={() => navigate("/components")}>
+        <div className="dashboard-card" onClick={() => navigate("/items")}>
           <div className="card-icon">📋</div>
           <h2>View Inventory</h2>
           <p>Browse, filter, and manage components</p>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/add-component")}>
+        <div className="dashboard-card" onClick={() => navigate("/add-items")}>
           <div className="card-icon">➕</div>
           <h2>Add New Component</h2>
           <p>Register new hardware in your inventory</p>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/edit-component")}>
+        <div className="dashboard-card" onClick={() => navigate("/edit-items")}>
           <div className="card-icon">✏️</div>
           <h2>Edit Component</h2>
           <p>Modify existing component details</p>

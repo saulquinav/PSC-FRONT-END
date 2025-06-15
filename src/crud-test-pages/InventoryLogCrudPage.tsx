@@ -4,7 +4,7 @@ import { getBackendBaseApiUrl } from '../service/api-url';
 import { InventoryAction, InventoryLogDTO } from '../types/inventory-log/InventoryLogDTO';
 import { axiosPublicClient } from '../service/client';
 
-const API_URL = getBackendBaseApiUrl() + "/inventorylogs";
+// const API_URL = getBackendBaseApiUrl() + "/inventorylogs";
 
 export function InventoryLogCrudPage()
 {

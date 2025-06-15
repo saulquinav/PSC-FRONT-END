@@ -8,7 +8,7 @@ import "./AuthPages.css";
 import { UserLoginDTO } from "../types/user/UserLoginDTO";
 
 
-const API_URL = getBackendBaseApiUrl() + "/auth/login";
+// const API_URL = getBackendBaseApiUrl() + "/auth/login";
 
 export function LoginPage() {
   const [username, setUsername] = useState('');

@@ -7,7 +7,7 @@ import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
 import "./InventoryItemListPage.css";
 import { axiosPublicClient } from "../service/client";
 
-const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
+// const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
 export function InventoryItemListPage() {
   const navigate = useNavigate();

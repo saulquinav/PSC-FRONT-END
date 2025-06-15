@@ -3,7 +3,7 @@ import { InventoryItemDTO, ItemType } from '../types/inventory-item/InventoryIte
 import { getBackendBaseApiUrl } from '../service/api-url';
 import { axiosPublicClient } from '../service/client';
 
-const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
+// const API_URL = getBackendBaseApiUrl() + "/inventoryitems";
 
 export function InventoryItemCrudPage()
 {

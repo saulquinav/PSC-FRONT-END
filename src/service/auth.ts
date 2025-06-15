@@ -4,6 +4,11 @@ import { getBackendBaseApiUrl } from "./api-url";
 
 const API_URL = getBackendBaseApiUrl() + "/auth";
 
+export function getToken(): string | null
+{
+    return localStorage.getItem('token');
+}
+
 export async function login(username: string, password: string) {
     const res = await fetch(`${API_URL}/login`, {
         method: 'POST',

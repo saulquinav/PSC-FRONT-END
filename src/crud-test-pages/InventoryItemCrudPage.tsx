@@ -24,7 +24,7 @@ export function InventoryItemCrudPage()
 
     const fetchItems = async () => {
         try{
-            const response = await axiosPublicClient.get<InventoryItemDTO[]>(API_URL);
+            const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
             setInventoryItems(response.data);
             setErrorMessage(null);
             setBackendAvailable(true);
@@ -37,7 +37,7 @@ export function InventoryItemCrudPage()
 
     const handleCreate = async () => {
         try {
-            await axiosPublicClient.post(API_URL, newItem);
+            await axiosPublicClient.post("/inventoryitems", newItem);
             setNewItem({ name: "", itemType: ItemType.OTHER, brand: "", model: "", quantity: 0 });
             fetchItems();
         }
@@ -49,7 +49,7 @@ export function InventoryItemCrudPage()
 
     const handleDelete = async (id: number) => {
         try {
-            await axiosPublicClient.delete(`${API_URL}/${id}`);
+            await axiosPublicClient.delete(`/inventoryitems/${id}`);
             fetchItems();
         }
         catch (err) {
@@ -60,7 +60,7 @@ export function InventoryItemCrudPage()
 
     const handleUpdate = async (item: InventoryItemDTO) => {
         try {
-            await axiosPublicClient.put(`${API_URL}/${item.id}`, item);
+            await axiosPublicClient.put(`/inventoryitems/${item.id}`, item);
             fetchItems();
         }
         catch (err) {

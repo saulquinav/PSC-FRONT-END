@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { axiosPublicClient } from "../service/client";
+import { getBackendBaseApiUrl } from "../service/api-url";
+
 import "./AuthPages.css";
+import { UserLoginDTO } from "../types/user/UserLoginDTO";
+
+
+const API_URL = getBackendBaseApiUrl() + "/auth/login";
 
 export function LoginPage() {
   const [username, setUsername] = useState('');
@@ -9,7 +17,14 @@ export function LoginPage() {
 
   const handleLogin = async () => {
     if (username && password) {
-      localStorage.setItem("username", username);
+      const loginDTO: UserLoginDTO = { username: username, password: password }
+
+      const response = await axiosPublicClient.post("/auth/login", loginDTO);
+
+      /* This is the important part: after a successful login, we obtain a 'token'
+      ** from the back-end, and we store inside the browser's 'localStorage'. */
+      localStorage.setItem("token", response.data.token);
+
       navigate("/dashboard");
     } else {
       alert("Please enter both username and password");

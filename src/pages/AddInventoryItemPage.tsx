@@ -29,7 +29,7 @@ export function AddInventoryItemPage() {
 
   const handleCreate = async () => {
     try {
-        await axiosPublicClient.post(API_URL, newItem);
+        await axiosPublicClient.post("/inventoryitems", newItem);
         setNewItem({ name: "", itemType: ItemType.OTHER, brand: "", model: "", quantity: 0 });
     }
     catch (err) {

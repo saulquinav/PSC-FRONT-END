@@ -23,7 +23,7 @@ export function InventoryLogCrudPage()
 
     const fetchItems = async () => {
         try{
-            const response = await axiosPublicClient.get<InventoryLogDTO[]>(API_URL);
+            const response = await axiosPublicClient.get<InventoryLogDTO[]>("/inventorylogs");
             setInventoryItems(response.data);
             setErrorMessage(null);
             setBackendAvailable(true);
@@ -36,7 +36,7 @@ export function InventoryLogCrudPage()
 
     const createItem = async () => {
         try {
-            await axiosPublicClient.post(API_URL, newLog);
+            await axiosPublicClient.post("/inventorylogs", newLog);
             setNewLog({ action: InventoryAction.CREATE, quantityChange: 0, note: "" });
             fetchItems();
         }
@@ -48,7 +48,7 @@ export function InventoryLogCrudPage()
 
     const deleteLog = async (id: number) => {
         try {
-            await axiosPublicClient.delete(`${API_URL}/${id}`);
+            await axiosPublicClient.delete(`/inventorylogs/${id}`);
             fetchItems();
         }
         catch (err) {
@@ -59,7 +59,7 @@ export function InventoryLogCrudPage()
 
     const updateLog = async (item: InventoryLogDTO) => {
         try {
-            await axiosPublicClient.put(`${API_URL}/${item.id}`, item);
+            await axiosPublicClient.put(`/inventorylogs/${item.id}`, item);
             fetchItems();
         }
         catch (err) {

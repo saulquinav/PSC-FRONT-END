@@ -9,7 +9,7 @@ import { UserLoginDTO } from "../types/user/UserLoginDTO";
 import "./AuthPages.css";
 
 
-const API_URL = getBackendBaseApiUrl() + "/users";
+const API_URL = getBackendBaseApiUrl() + "/users/register";
 
 export function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -30,10 +30,11 @@ export function RegisterPage() {
         const newUser: UserLoginDTO = { username: username, password: password }
 
         // post() seems to work with or without '{ withCredentials: true }'
-        await axiosPublicClient.post(API_URL, newUser, { withCredentials: true });
+        // await axiosPublicClient.post(API_URL, newUser, { withCredentials: true });
+        await axiosPublicClient.post("/users/register", newUser);
         
         alert("Account created successfully!");
-        navigate("/");
+        navigate("/login");
       }
       catch (err) {
         setErrorMessage('Failed to create user.');

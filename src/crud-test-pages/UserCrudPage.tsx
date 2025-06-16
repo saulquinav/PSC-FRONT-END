@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { getBackendBaseApiUrl } from "../service/api-url";
 import { UserReadingDTO } from "../types/user/UserReadingDTO";
 import { UserRegisterDTO } from "../types/user/UserRegisterDTO";
 import { axiosPublicClient } from "../service/auth";
@@ -113,6 +112,7 @@ export function UserCrudPage() {
           <li key={user.id}>
             <div>Username: {user.username}</div>
             <div>Password: {user.password}</div>
+            <div>Role: {user.role}</div>
             <input
               value={editUsers[user.id]?.username || ''}
               onChange={(e) => handleEditChange(user.id, 'username', e.target.value)}

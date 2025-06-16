@@ -4,4 +4,5 @@ export interface UserReadingDTO {
   id: number;
   username: string;
   password: string;
+  role: string;
 }

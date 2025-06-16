@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO } from "../types/inventory-item/InventoryItemDTO";
 
 import "./InventoryItemListPage.css";

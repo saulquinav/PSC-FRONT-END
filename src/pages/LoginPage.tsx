@@ -2,8 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { axiosAuthClient, axiosPublicClient } from "../service/auth";
-import { getBackendBaseApiUrl } from "../service/api-url";
-
 import { UserLoginDTO } from "../types/user/UserLoginDTO";
 import { AuthContext } from "../components/AuthContext";
 
@@ -14,6 +12,8 @@ export function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const { setToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -22,17 +22,23 @@ export function LoginPage() {
     if (username && password) {
       const loginDTO: UserLoginDTO = { username: username, password: password }
 
-      const response = await axiosPublicClient.post("/auth/login", loginDTO);
-      // const response = await axiosAuthClient.post("/auth/login", loginDTO);
+      try {
+        const response = await axiosPublicClient.post("/auth/login", loginDTO);
+        // const response = await axiosAuthClient.post("/auth/login", loginDTO);
 
-      /* This is the important part: after a successful login, we obtain a 'token'
-      ** from the back-end, and we store inside the browser's 'localStorage'.
-      ** We also store that token into a 'React Context' which is automatically sent
-      ** to all its child components without requiring "prop drilling". */
-      localStorage.setItem("jwt-auth-token", response.data.token);
-      setToken(response.data.token);
+        /* This is the important part: after a successful login, we obtain a 'token'
+        ** from the back-end, and we store inside the browser's 'localStorage'.
+        ** We also store that token into a 'React Context' which is automatically sent
+        ** to all its child components without requiring "prop drilling". */
+        localStorage.setItem("jwt-auth-token", response.data.token);
+        setToken(response.data.token);
 
-      navigate("/dashboard");
+        navigate("/dashboard");
+      }
+      catch (err) {
+        setErrorMessage("Login failed");
+      }
+
     } else {
       alert("Please enter both username and password");
     }

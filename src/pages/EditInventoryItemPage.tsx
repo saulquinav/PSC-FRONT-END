@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO, ItemType } from "../types/inventory-item/InventoryItemDTO";
 
 import "./EditInventoryItemPage.css";

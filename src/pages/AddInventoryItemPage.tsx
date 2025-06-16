@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { getBackendBaseApiUrl } from "../service/api-url";
 import { InventoryItemDTO, ItemType } from '../types/inventory-item/InventoryItemDTO';
+import { axiosPublicClient } from '../service/auth';
 
 import "./AddInventoryItemPage.css";
-import { axiosPublicClient } from '../service/auth';
 
 
 export function AddInventoryItemPage() {

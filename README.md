@@ -1,6 +1,6 @@
 # 'inventory-auth' branch
 
-This branch is for adding authentication (login) and authorization for the React CRUD pages.
+This branch is for adding authentication (login) and authorization for the React pages.
 
 # Getting Started with Create React App
 

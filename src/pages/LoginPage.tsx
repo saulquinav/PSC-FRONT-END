@@ -22,8 +22,8 @@ export function LoginPage() {
     if (username && password) {
       const loginDTO: UserLoginDTO = { username: username, password: password }
 
-      // const response = await axiosPublicClient.post("/auth/login", loginDTO);
-      const response = await axiosAuthClient.post("/auth/login", loginDTO);
+      const response = await axiosPublicClient.post("/auth/login", loginDTO);
+      // const response = await axiosAuthClient.post("/auth/login", loginDTO);
 
       /* This is the important part: after a successful login, we obtain a 'token'
       ** from the back-end, and we store inside the browser's 'localStorage'.

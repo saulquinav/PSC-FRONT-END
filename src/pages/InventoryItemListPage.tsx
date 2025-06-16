@@ -26,8 +26,8 @@ export function InventoryItemListPage() {
   const fetchItems = async () => {
     try {
       // Get items
-      // const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
-      const response = await axiosAuthClient.get<InventoryItemDTO[]>("/inventoryitems");
+      const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
+      // const response = await axiosAuthClient.get<InventoryItemDTO[]>("/inventoryitems");
 
       // Sort items before displaying
       const sortedItems = response.data.sort((a, b) => a.id - b.id); // sort by ID ascending

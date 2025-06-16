@@ -22,8 +22,8 @@ export function InventoryItemCrudPage()
 
     const fetchItems = async () => {
         try{
-            // const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
-            const response = await axiosAuthClient.get<InventoryItemDTO[]>("/inventoryitems");
+            const response = await axiosPublicClient.get<InventoryItemDTO[]>("/inventoryitems");
+            // const response = await axiosAuthClient.get<InventoryItemDTO[]>("/inventoryitems");
             setInventoryItems(response.data);
             setErrorMessage(null);
             setBackendAvailable(true);
@@ -36,8 +36,8 @@ export function InventoryItemCrudPage()
 
     const handleCreate = async () => {
         try {
-            // await axiosPublicClient.post("/inventoryitems", newItem);
-            await axiosAuthClient.post("/inventoryitems", newItem);
+            await axiosPublicClient.post("/inventoryitems", newItem);
+            // await axiosAuthClient.post("/inventoryitems", newItem);
             setNewItem({ name: "", itemType: ItemType.OTHER, brand: "", model: "", quantity: 0 });
             fetchItems();
         }
@@ -49,8 +49,8 @@ export function InventoryItemCrudPage()
 
     const handleDelete = async (id: number) => {
         try {
-            // await axiosPublicClient.delete(`/inventoryitems/${id}`);
-            await axiosAuthClient.delete(`/inventoryitems/${id}`);
+            await axiosPublicClient.delete(`/inventoryitems/${id}`);
+            // await axiosAuthClient.delete(`/inventoryitems/${id}`);
             fetchItems();
         }
         catch (err) {
@@ -61,8 +61,8 @@ export function InventoryItemCrudPage()
 
     const handleUpdate = async (item: InventoryItemDTO) => {
         try {
-            // await axiosPublicClient.put(`/inventoryitems/${item.id}`, item);
-            await axiosAuthClient.put(`/inventoryitems/${item.id}`, item);
+            await axiosPublicClient.put(`/inventoryitems/${item.id}`, item);
+            // await axiosAuthClient.put(`/inventoryitems/${item.id}`, item);
             fetchItems();
         }
         catch (err) {

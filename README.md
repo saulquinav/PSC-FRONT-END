@@ -1,6 +1,6 @@
-# 'inventory-auth' branch
+# 'inventory-login-unprotected-endpoints' branch
 
-This branch is for adding authentication (login) and authorization for the React pages.
+This branch is for adding authentication (login) and for using public endpoints from the back-end.
 
 # Getting Started with Create React App
 

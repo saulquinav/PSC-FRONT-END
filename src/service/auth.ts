@@ -20,10 +20,10 @@ const token = localStorage.getItem('jwt-auth-token');
 // Public APIs client
 export const axiosPublicClient = axios.create({
   baseURL: API_URL,
-  // withCredentials: true, // 🔸 Important for sending cookies/auth
+  withCredentials: false, // true only if you use session cookies
   headers: {
     "Content-Type": "application/json",
-    'Accept': 'application/json',   // Optional, but useful:
+    // 'Accept': 'application/json',   // Optional, but useful:
   },
 });
 

@@ -1,4 +1,4 @@
-# 'inventory-login-unprotected-endpoints' branch
+# 'inventory-laptop-v2' branch
 
 This branch is for adding authentication (login) and for using public endpoints from the back-end.
 

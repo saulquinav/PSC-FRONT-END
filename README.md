@@ -1,6 +1,6 @@
-# 'inventory-login-unprotected-endpoints' branch
+# 'inventory-laptop' branch
 
-This branch is for adding authentication (login) and for using public endpoints from the back-end.
+This branch is for tweaking authentication (login) and for using public endpoints from the back-end, so that they work on a different laptop computer.
 
 # Getting Started with Create React App
 
